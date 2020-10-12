@@ -1,0 +1,2 @@
+#never include the nodem modules folder. after cloning git repository, just run npm install to install all of the relevant packages
+/node_modules
