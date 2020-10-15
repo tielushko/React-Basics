@@ -5,43 +5,22 @@ import ReactDOM from "react-dom";
 //grabbing css from the source -> notice that it is good only for small projects due to name collisions.
 import "./index.css"; //./ means file in same folder ../ is file in parent folder
 
-//setup variables. //can do a list but can also do object book = {img: , title: , author:  }
+//import and export statements - ES6 JavaScript statements
+import { books } from "./books"; //importing the list of book objects from books.js //notice the same name of variable and relative path and no extension since it js file
 
-const books = [
-  {
-    id: 1, //id for the unique react item identification
-    title: "Room on the Broom",
-    author: "Julia Donaldson",
-    img:
-      "https://images-na.ssl-images-amazon.com/images/I/A1XyS0D1S-L._AC_UL200_SR200,200_.jpg",
-  },
-  {
-    id: 2, //id for the unique react item identification
-    title: "Modern Comfort Food",
-    author: "Ina Garten",
-    img:
-      "https://images-na.ssl-images-amazon.com/images/I/81CTXWG01OL._AC_UL200_SR200,200_.jpg",
-  },
-  {
-    id: 3, //id for the unique react item identification
-    title: "The Antiquarian Sticker Book: Over 1,000…",
-    author: "Odd Dot",
-    img:
-      "https://images-na.ssl-images-amazon.com/images/I/A1Xhi8TtpFL._AC_UL200_SR200,200_.jpg",
-  },
-];
+import SpecificBook from "./Book"; //default export
+//notice that we need to change it when rendering in booklist
+
+//export example with relative path.
+import { greeting } from "./testing_path/testingPath";
 
 function BookList() {
+  console.log(greeting);
   return (
     <section className="booklist">
       {books.map((book) => {
-        return <Book key={book.id} book={book}></Book>;
+        return <SpecificBook key={book.id} {...book}></SpecificBook>;
       })}
-      {/* popular spread operator way of doing things
-        {books.map((book) => {
-          return <Book key={book.id} book{...book}></Book>;
-        })
-        */}
     </section>
   );
 }
@@ -51,27 +30,6 @@ function BookList() {
 
 // }
 //notice children destructure - elements that we add between open and closing brackets!!!. make sure to call them children to access them later.
-const Book = (props /* { img, title, author, children } */) => {
-  //destructuring inside brackets above
-  const { img, title, author } = props.book; //destructuring of props if passing in props
-
-  //if using spread operator just have this
-  // const { img, title, author } = props
-  return (
-    <article className="book">
-      <img src={img} alt=""></img>
-      <h1>{title}</h1>
-      <h3
-        style={{ color: "#617d98", fontSize: "0.75rem", marginTop: "0.25rem" }}
-      >
-        {author}
-      </h3>
-      {props.children}
-      {/* <p>{let x = 6;</p>  would actually not work as this does not return a value*/}
-      {/* <p>{6+6}</p> this would work for example*/}
-    </article>
-  );
-};
 
 // const Image = (props) => <img src={img} alt=""></img>;
 
